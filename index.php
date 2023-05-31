@@ -12,15 +12,14 @@
           die("Couldn't connect to server: " . mysqli_connect_error());
         }
         // else {
-        //   echo "Connecting to server is successful <br>";
-        // }
-?>
+        //   echo "Connecting to server is successful <br>"; // } ?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.52.0/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style type="text/tailwindcss">
       @layer utilities {
@@ -47,7 +46,7 @@
             >
               <g
                 transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)"
-                fill="#000000"
+                fill="#fff"
                 stroke="none"
               >
                 <path
@@ -174,7 +173,7 @@
               <button
                 title="Search"
                 type="submit"
-                class="flex items-center justify-center relative h-8 w-8 rounded-full"
+                class="flex items-center justify-center relative h-8 w-8 rounded-full hover:bg-gray-200 ml-2"
               >
                 <svg
                   viewBox="0 0 32 32"
@@ -187,7 +186,7 @@
                     fill: none;
                     height: 12px;
                     width: 12px;
-                    stroke: currentcolor;
+                    stroke: #ffff;
                     stroke-width: 5.33333;
                     overflow: visible;
                   "
@@ -221,6 +220,7 @@
             </a> -->
             <div class="block relative">
               <button
+              title="language"
                 type="button"
                 class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full relative"
               >
@@ -236,7 +236,7 @@
                         display: block;
                         height: 16px;
                         width: 16px;
-                        fill: currentcolor;
+                        fill: #fff;
                       "
                     >
                       <path
@@ -267,7 +267,7 @@
                       fill: none;
                       height: 16px;
                       width: 16px;
-                      stroke: currentcolor;
+                      stroke: #fff;
                       stroke-width: 3;
                       overflow: visible;
                     "
@@ -291,7 +291,7 @@
                       display: block;
                       height: 100%;
                       width: 100%;
-                      fill: currentcolor;
+                      fill: #fff;
                     "
                   >
                     <path
@@ -308,13 +308,13 @@
     </nav>
   </head>
   <body>
-    <div class="lg:content-auto justify-content-center py-8 px-8">
+    <div class="lg:content-auto justify-content-center py-8 px-8 bg-slate-500">
       <!-- component -->
       <form class="w-full max-w-lg">
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="block uppercase tracking-wide text-slate-800 text-xs font-bold mb-2"
               for="grid-password"
             >
               Note Title
@@ -332,12 +332,14 @@
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              class="block uppercase tracking-wide text-slate-800 text-gray-700 text-xs font-bold mb-2"
               for="grid-password"
             >
               Note Discription
             </label>
-            <div class="border bg-gray-200 overflow-hidden rounded-t-lg shadow-xl">
+            <div
+              class="border bg-gray-200 overflow-hidden rounded-t-lg shadow-xl"
+            >
               <script
                 src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
                 defer
@@ -485,15 +487,20 @@
     <!-- component -->
 
     <div class="h-0.5 w-full bg-teal-400 drop-shadow-2xl"></div>
-    <div class=" ">
-      <?php
-          $sql = "SELECT * FROM `notes`";
-          $result = mysqli_query($conn, $sql);
-          while($row = mysqli_fetch_assoc($result)) {
-            echo $row['num']. ". <strong>Title: </strong> ". $row['title']. " <br><strong>Description: </strong>". $row['desc'];
-            echo "<br>";
-          }
-        ?>
+    <div class="px-6 py-6 bg-rose-700">
+      <div class="card w-96 shadow-2xl glass"> 
+            <div class="card-body items-center text-center">
+            <?php
+            $sql = "SELECT * FROM `notes`";
+            $result = mysqli_query($conn, $sql);
+            while($row = mysqli_fetch_assoc($result)) {
+              echo '<h2 class="card-title">'.$row["title"].'</h2>';
+              echo '<p class="px-3">'.$row["desc"].'</p>';
+            } 
+              ?>
+            </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
